@@ -1,0 +1,59 @@
+# ════════════════════════════════════════════════════════════════════
+#  .gitattributes — tell git and GitHub Linguist about Bantu (.b)
+# ════════════════════════════════════════════════════════════════════
+#
+#  The Bantu programming language uses the .b extension. GitHub's
+#  Linguist doesn't yet know about Bantu (a PR is pending), so we
+#  mark .b files explicitly here. Once Linguist accepts Bantu, the
+#  language bar will automatically show "Bantu" for any repo with
+#  .b files. Until then, the *.b files are still attributed to the
+#  custom "Bantu" name via the linguist-language attribute below.
+#
+#  Reference:
+#    https://github.com/github-linguist/linguist
+#    https://github.com/github-linguist/linguist/blob/master/docs/overrides.md
+
+# 1) Mark every .b file as Bantu for Linguist
+*.b   linguist-language=Bantu
+
+# 2) Bantu source files use UTF-8 with LF line endings
+*.b   text eol=lf working-tree-encoding=UTF-8
+
+# 3) Make Bantu files diffable as text (they are plain UTF-8 source)
+*.b   diff
+
+# 4) The bantu-src/ tree is the vendored interpreter source (kept in
+#    the repo so the Dockerfile can build Bantu from scratch). Mark
+#    it as vendored so Linguist doesn't skew the language stats —
+#    only OUR application code (server.b, public/*.b) counts.
+bantu-src/** linguist-vendored
+
+# 5) Standard library modules under lib/ are NOT vendored — they're
+#    part of our app — so we explicitly un-vendor them.
+lib/** -linguist-vendored
+
+# 6) Shell scripts
+*.sh  text eol=lf
+
+# 7) Windows batch files
+*.bat text eol=crlf
+
+# 8) Binary assets — never diff, never merge
+*.png binary
+*.jpg binary
+*.ico binary
+*.zip binary
+*.exe binary
+*.dll binary
+*.so  binary
+*.dylib binary
+
+# 9) Markdown docs
+*.md  text eol=lf
+
+# 10) YAML configs
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# 11) JSON
+*.json text eol=lf
