@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bantu FS &amp; Power Demo</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Bantu File-System &amp; Power Demo</h1>
+    <p class="subtitle">Pure Bantu v1.3.0 + Sua HTTP + libc FFI — running in a Docker container, deployable to Render.</p>
+    <div id="status-pill" class="pill pill-loading">checking…</div>
+  </header>
+
+  <main>
+    <!-- ─── System info panel ──────────────────────────────────── -->
+    <section class="card">
+      <h2>System Info</h2>
+      <p class="card-desc">Low-level details read directly from the host's <code>/proc</code>, <code>uname</code>, etc. — proves Bantu can introspect the machine it runs on.</p>
+      <button id="btn-sysinfo">Fetch system info</button>
+      <pre id="sysinfo" class="output">— click the button —</pre>
+    </section>
+
+    <!-- ─── File system panel ─────────────────────────────────── -->
+    <section class="card">
+      <h2>File System <small>(workspace)</small></h2>
+      <p class="card-desc">Create, read, and delete files. Delete uses Bantu's FFI to call <code>libc.so.6 unlink()</code> directly — a real low-level syscall, not a shell wrapper.</p>
+
+      <div class="toolbar">
+        <button id="btn-refresh" class="btn-secondary">↻ Refresh</button>
+        <span id="file-count" class="muted">— files</span>
+      </div>
+
+      <table id="files-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Date</th>
+            <th>Perms</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="6" class="muted">No files yet</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Create / overwrite a file</h3>
+      <form id="form-create">
+        <input type="text" id="input-name" placeholder="filename.txt" required />
+        <textarea id="input-content" placeholder="file contents…" rows="4"></textarea>
+        <button type="submit">Create file</button>
+      </form>
+
+      <div id="file-reader" class="hidden">
+        <h3>Reading: <code id="reader-name"></code></h3>
+        <pre id="reader-content" class="output"></pre>
+        <button class="btn-secondary" onclick="document.getElementById('file-reader').classList.add('hidden')">Close</button>
+      </div>
+    </section>
+
+    <!-- ─── Power control panel ───────────────────────────────── -->
+    <section class="card">
+      <h2>Low-Level Power Control</h2>
+      <p class="card-desc">
+        Each button issues an OS power command (<code>shutdown -h now</code>, <code>systemctl suspend</code>, etc.).
+        In <strong>Docker / Render</strong> the action is <em>simulated</em> (a container can't power off its host).
+        On <strong>bare metal</strong> the actual OS command runs (requires <code>shutdown</code> privileges —
+        see README). All actions are written to an audit log.
+      </p>
+
+      <div class="power-grid">
+        <button class="power-btn power-shutdown" data-action="shutdown">
+          <span class="power-icon">⏻</span>
+          <span class="power-label">Shutdown</span>
+          <span class="power-hint">power off</span>
+        </button>
+        <button class="power-btn power-restart" data-action="restart">
+          <span class="power-icon">↻</span>
+          <span class="power-label">Restart</span>
+          <span class="power-hint">reboot</span>
+        </button>
+        <button class="power-btn power-sleep" data-action="sleep">
+          <span class="power-icon">🌙</span>
+          <span class="power-label">Sleep</span>
+          <span class="power-hint">suspend to RAM</span>
+        </button>
+        <button class="power-btn power-hibernate" data-action="hibernate">
+          <span class="power-icon">💾</span>
+          <span class="power-label">Hibernate</span>
+          <span class="power-hint">suspend to disk</span>
+        </button>
+      </div>
+
+      <div id="power-result" class="output hidden"></div>
+
+      <h3>Audit log</h3>
+      <button id="btn-log" class="btn-secondary">Refresh log</button>
+      <pre id="power-log" class="output">— no entries yet —</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Built with the <a href="https://github.com/AsseySilivestir/Bantu" target="_blank">Bantu Programming Language</a> v1.3.0 ·
+      <a href="https://render.com" target="_blank">Deploy on Render</a> ·
+      <a href="/api/health" target="_blank">/api/health</a>
+    </p>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

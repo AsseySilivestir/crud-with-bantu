@@ -1,0 +1,21 @@
+# Build artifacts
+bantu-src/compiler/build/
+**/*.o
+**/*.a
+
+# Local runtime artifacts
+workspace/
+*.db
+*.db-*
+*.log
+.power.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Bantu runtime artifacts
+__pycache__/
+*.pyc

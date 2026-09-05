@@ -1,0 +1,30 @@
+# Render Blueprint — Bantu FS & Power Demo
+# Docs: https://render.com/docs/blueprint-spec
+#
+# After pushing this repo to GitHub, in Render:
+#   New → Blueprint → pick the repo → Render will detect this render.yaml
+#
+services:
+  - type: web
+    name: bantu-fs-power-demo
+    runtime: docker
+    plan: free
+    region: ohio   # change to a region near your users (oregon / frankfurt / singapore …)
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: WORKSPACE
+        value: /app/workspace
+      # Uncomment to receive deploy notifications via email
+      # - key: RENDER_NOTIFICATION_EMAIL
+      #   sync: false
+    # Persistent disk — file-system demos will survive redeploys.
+    # (Render free tier supports 1 GB; bump up for production.)
+    disk:
+      name: bantu-workspace
+      mountPath: /app/workspace
+      sizeGB: 1

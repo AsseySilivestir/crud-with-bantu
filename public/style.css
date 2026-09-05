@@ -1,0 +1,280 @@
+:root {
+  --bg:        #0d1117;
+  --bg-card:   #161b22;
+  --bg-input:  #0d1117;
+  --border:    #30363d;
+  --fg:        #c9d1d9;
+  --fg-muted:  #8b949e;
+  --accent:    #58a6ff;
+  --accent-2:  #3fb950;
+  --danger:    #f85149;
+  --warn:      #d29922;
+  --code-bg:   #1f2428;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ─── Header ───────────────────────────────────────────────────── */
+header {
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+header h1 {
+  margin: 0 0 0.3rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0 auto 1rem;
+  max-width: 720px;
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+}
+
+/* ─── Status pill ───────────────────────────────────────────────── */
+.pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.pill-loading { background: #21262d; color: var(--fg-muted); border-color: var(--border); }
+.pill-ok      { background: rgba(63, 185, 80, 0.15);  color: var(--accent-2); border-color: var(--accent-2); }
+.pill-error   { background: rgba(248, 81, 73, 0.15);  color: var(--danger);   border-color: var(--danger); }
+
+/* ─── Main layout ───────────────────────────────────────────────── */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.card h2 small {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--fg-muted);
+}
+
+.card-desc {
+  margin: 0 0 1rem;
+  color: var(--fg-muted);
+  font-size: 0.92rem;
+}
+
+.card-desc code {
+  background: var(--code-bg);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────── */
+button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: background 0.15s, transform 0.05s;
+}
+
+button:hover { background: #4f93e0; }
+button:active { transform: translateY(1px); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover { background: #21262d; }
+
+/* ─── Toolbar ───────────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.muted { color: var(--fg-muted); font-size: 0.9rem; }
+
+/* ─── File table ────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-weight: 600;
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+td code {
+  background: var(--code-bg);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+td a {
+  color: var(--accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+td a:hover { text-decoration: underline; }
+
+.btn-delete {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 0.2rem 0.5rem;
+  font-size: 0.85rem;
+}
+.btn-delete:hover { background: rgba(248, 81, 73, 0.15); }
+
+/* ─── Forms ─────────────────────────────────────────────────────── */
+form {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+input[type="text"], textarea {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-family: inherit;
+  width: 100%;
+}
+
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+textarea {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  resize: vertical;
+}
+
+/* ─── Output / pre ──────────────────────────────────────────────── */
+.output {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.hidden { display: none; }
+
+/* ─── Power buttons ──────────────────────────────────────────────── */
+.power-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.power-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--bg-input);
+  border: 2px solid var(--border);
+  color: var(--fg);
+  border-radius: 8px;
+  font-size: 1rem;
+  gap: 0.25rem;
+}
+
+.power-btn:hover { border-color: var(--accent); }
+.power-icon { font-size: 1.8rem; line-height: 1; }
+.power-label { font-weight: 600; font-size: 0.95rem; }
+.power-hint { font-size: 0.78rem; color: var(--fg-muted); }
+
+.power-shutdown:hover  { border-color: var(--danger);  background: rgba(248, 81, 73, 0.08); }
+.power-restart:hover   { border-color: var(--warn);    background: rgba(210, 153, 34, 0.08); }
+.power-sleep:hover      { border-color: var(--accent);  background: rgba(88, 166, 255, 0.08); }
+.power-hibernate:hover  { border-color: var(--accent-2); background: rgba(63, 185, 80, 0.08); }
+
+/* ─── Footer ────────────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ─── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  header h1 { font-size: 1.4rem; }
+  .card { padding: 1rem; }
+  main { padding: 1rem; }
+}

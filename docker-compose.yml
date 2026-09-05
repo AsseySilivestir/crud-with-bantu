@@ -1,0 +1,28 @@
+# docker-compose.yml — local development
+# Usage:  docker compose up --build
+#         open http://localhost:8080
+#
+services:
+  bantu-demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bantu-fs-power-demo
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - WORKSPACE=/app/workspace
+    volumes:
+      # Persist the workspace across container restarts
+      - bantu-workspace:/app/workspace
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  bantu-workspace:

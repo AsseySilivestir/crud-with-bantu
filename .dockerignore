@@ -1,0 +1,24 @@
+# Build artifacts
+bantu-src/compiler/build/
+**/*.o
+**/*.a
+
+# Local runtime artifacts
+workspace/
+*.db
+*.db-*
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docs we don't need in the image
+*.md
+!README.md
